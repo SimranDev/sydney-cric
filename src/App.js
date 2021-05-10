@@ -1,24 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import Navbar from "./components/navbar/Navbar";
+import Sidebar from "./components/sidebar/Sidebar";
+import { SlideRightContext } from "./helpers/Contexts";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import Matches from "./pages/Matches";
+import CricEvents from "./pages/CricEvents";
 
 function App() {
+  const [slideRight, setSlideRight] = useState(true);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <SlideRightContext.Provider value={{ slideRight, setSlideRight }}>
+        <Navbar />
+        <Sidebar />
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <Route path="/matches" exact component={Matches} />
+          <Route path="/events" exact component={CricEvents} />
+        </Switch>
+      </SlideRightContext.Provider>
+    </Router>
   );
 }
 
