@@ -1,17 +1,40 @@
+import { useState } from "react";
 import styled from "styled-components";
 import MatchListItem from "../components/MatchListItem";
 import { matchesData } from "../data/matchesData";
 
 const Matches = () => {
+  const day = new Date().toString().slice(8, 10);
+  const month = new Date().toString().slice(4, 7);
+  const year = new Date().toString().slice(11, 15);
+  const date = day + "-" + month + "-" + year;
+  const convertTimeToEpochTime = Date.parse(date);
+
+  const [newData, setNewData] = useState(matchesData);
+
   const filterMatchesToday = () => {
-    const result = matchesData.filter(
-      (item) => Date.parse(item.date) === Date.now()
-    );
+    setNewData(matchesData.filter((item) => item.date === date));
+    const myDate = matchesData[0].date.toString();
     console.log(Date.now());
-    console.log(Date.parse(matchesData[1].date));
-    console.log(result);
-    // console.log(Date().slice());
-    console.log(new Date());
+    console.log(newData);
+  };
+
+  const filterMatchesPrevious = () => {
+    setNewData(
+      matchesData.filter(
+        (item) => Date.parse(item.date) < convertTimeToEpochTime
+      )
+    );
+    console.log(newData);
+  };
+
+  const filterMatchesUpcoming = () => {
+    setNewData(
+      matchesData.filter(
+        (item) => Date.parse(item.date) > convertTimeToEpochTime
+      )
+    );
+    console.log(newData);
   };
 
   return (
@@ -19,8 +42,12 @@ const Matches = () => {
       <TitleDiv>
         <h1>MATCHES</h1>
       </TitleDiv>
-      <button onClick={filterMatchesToday}>Today</button>
-      {matchesData.map((item) => (
+      <FiltersDiv>
+        <FilterButton onClick={filterMatchesPrevious}>Previous</FilterButton>
+        <FilterButton onClick={filterMatchesToday}>Today</FilterButton>
+        <FilterButton onClick={filterMatchesUpcoming}>Upcoming</FilterButton>
+      </FiltersDiv>
+      {newData.map((item) => (
         <MatchListItem
           date={item.date.slice(0, 6).replace(/-/g, " ")}
           time={item.time}
@@ -38,6 +65,10 @@ const Matches = () => {
 };
 
 export default Matches;
+
+const FiltersDiv = styled.div`
+  display: flex;
+`;
 
 const TitleDiv = styled.div`
   display: flex;
@@ -61,9 +92,27 @@ const MatchesContainer = styled.div`
   /* border: 1px dashed blue; */
   margin-left: 80px;
   margin-top: 50px;
-  /* height: 400px; */
 
   @media (max-width: 800px) {
     margin: auto;
+  }
+`;
+
+const FilterButton = styled.button`
+  width: 100px;
+  background-color: var(--secondary-accent-clr);
+  color: white;
+  margin: 0 10px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+  border-width: 0;
+
+  :hover {
+    transition-duration: 0.7s;
+    transform: translateY(-1.6px);
+  }
+
+  :active {
+    color: black;
+    transform: translateY(0px);
   }
 `;

@@ -18,7 +18,7 @@ const MatchListItem = (props) => {
             <h5>{props.teamAName}</h5>
           </TeamName>
         </Team>
-        <h3>V</h3>
+        <h3 style={{ color: "var(--primary-accent-clr)" }}>V</h3>
         <Team>
           <img src={props.teamBImg} alt="" />
           <TeamName>
@@ -90,6 +90,10 @@ const ChipsDiv = styled.div`
   display: flex;
   /* justify-content: flex-end; */
   /* margin-right: 20px; */
+
+  @media (max-width: 750px) {
+    display: none;
+  }
 `;
 
 const LocationDiv = styled.div`
@@ -114,12 +118,21 @@ const UmpireDiv = styled.div`
     width: 20px;
     fill: var(--list-icon-clr);
   }
+
+  @media (max-width: 750px) {
+    width: 100%;
+    /* border: 1px dashed purple; */
+  }
 `;
 
 const RightDiv = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  @media (max-width: 750px) {
+    justify-content: flex-start;
+  }
 `;
 
 const MatchDetailsDiv = styled.div`
@@ -128,6 +141,12 @@ const MatchDetailsDiv = styled.div`
   width: 40%;
   height: 100%;
   /* border: 1px dashed blueviolet; */
+
+  @media (max-width: 750px) {
+    /* display: none; */
+    width: 100%;
+    border-top: 1px solid var(--primary-accent-clr);
+  }
 `;
 
 const Team = styled.div`
@@ -143,6 +162,11 @@ const Team = styled.div`
     height: 50px;
     width: 50px;
     border-radius: 14px;
+    justify-content: flex-start;
+  }
+
+  @media (max-width: 750px) {
+    justify-content: space-evenly;
   }
 `;
 
@@ -155,6 +179,13 @@ const TeamsVsDiv = styled.div`
   /* border: 1px dashed green; */
   display: flex;
   border-right: 2px solid #8e54e9;
+
+  @media (max-width: 750px) {
+    width: 80%;
+    border: none;
+    height: 70%;
+    /* display: none; */
+  }
 `;
 
 const DateDiv = styled.div`
@@ -164,6 +195,11 @@ const DateDiv = styled.div`
   p {
     font-size: 10px;
     color: var(--list-icon-clr);
+  }
+  @media (max-width: 750px) {
+    h2 {
+      font-size: 18px;
+    }
   }
   /* justify-content: space-between; */
 `;
@@ -176,6 +212,16 @@ const DateTimeDiv = styled.div`
   width: 20%;
   height: 100%;
   border-right: 2px solid #8e54e9;
+
+  @media (max-width: 750px) {
+    border: none;
+    height: fit-content;
+    justify-content: flex-start;
+  }
+
+  h3 {
+    font-size: 16px;
+  }
 `;
 
 const MatchListItemContainer = styled.div`
@@ -186,7 +232,12 @@ const MatchListItemContainer = styled.div`
   padding: 4px;
   background-color: var(--list-bg-clr);
 
-  @media (max-width: 900px) {
+  @media (max-width: 1150px) {
     width: 94%;
+  }
+
+  @media (max-width: 750px) {
+    height: 180px;
+    flex-wrap: wrap;
   }
 `;
