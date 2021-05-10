@@ -47,6 +47,8 @@ const ParentContainer = styled.div`
 `;
 
 const SidebarContainer = styled.nav`
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+
   display: flex;
   flex-direction: column;
   position: fixed;

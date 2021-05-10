@@ -1,10 +1,25 @@
 import styled from "styled-components";
 import { ReactComponent as UmpireIcon } from "../icons/noun_umpire out_2005485.svg";
 import { ReactComponent as LocationIcon } from "../icons/noun_Location_1041848.svg";
+import { motion } from "framer-motion";
 
 const MatchListItem = (props) => {
+  const childVariants = {
+    hidden: {
+      opacity: 0,
+      y: -50,
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.4,
+      },
+    },
+  };
+
   return (
-    <MatchListItemContainer>
+    <MatchListItemContainer variants={childVariants}>
       <DateTimeDiv>
         <DateDiv>
           <h2>{props.date}</h2>
@@ -136,6 +151,7 @@ const RightDiv = styled.div`
 
     h4 {
       font-size: 14px;
+      font-weight: 500;
     }
   }
 `;
@@ -229,7 +245,9 @@ const DateTimeDiv = styled.div`
   }
 `;
 
-const MatchListItemContainer = styled.div`
+const MatchListItemContainer = styled(motion.div)`
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
   display: flex;
   width: 80%;
   height: 120px;

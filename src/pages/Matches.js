@@ -2,6 +2,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import MatchListItem from "../components/MatchListItem";
 import { matchesData } from "../data/matchesData";
+import { motion } from "framer-motion";
 
 const Matches = () => {
   const day = new Date().toString().slice(8, 10);
@@ -37,8 +38,35 @@ const Matches = () => {
     console.log(newData);
   };
 
+  const parentVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.2,
+      },
+    },
+  };
+
+  const childVariants = {
+    hidden: {
+      opacity: 0,
+      x: -50,
+    },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 1,
+      },
+    },
+  };
+
   return (
-    <MatchesContainer>
+    <MatchesContainer
+      variants={parentVariants}
+      initial="hidden"
+      animate="visible"
+    >
       <TitleDiv>
         <h1>MATCHES</h1>
       </TitleDiv>
@@ -84,7 +112,7 @@ const TitleDiv = styled.div`
   }
 `;
 
-const MatchesContainer = styled.div`
+const MatchesContainer = styled(motion.div)`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -98,12 +126,14 @@ const MatchesContainer = styled.div`
   }
 `;
 
-const FilterButton = styled.button`
+const FilterButton = styled(motion.button)`
   width: 100px;
+  border-radius: 2px;
+
   background-color: var(--secondary-accent-clr);
   color: white;
   margin: 0 10px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
   border-width: 0;
 
   :hover {
