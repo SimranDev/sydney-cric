@@ -15,9 +15,8 @@ const Matches = () => {
 
   const filterMatchesToday = () => {
     setNewData(matchesData.filter((item) => item.date === date));
-    const myDate = matchesData[0].date.toString();
-    console.log(Date.now());
-    console.log(newData);
+    // console.log(Date.now());
+    // console.log(newData);
   };
 
   const filterMatchesPrevious = () => {
@@ -26,7 +25,7 @@ const Matches = () => {
         (item) => Date.parse(item.date) < convertTimeToEpochTime
       )
     );
-    console.log(newData);
+    // console.log(newData);
   };
 
   const filterMatchesUpcoming = () => {
@@ -35,7 +34,7 @@ const Matches = () => {
         (item) => Date.parse(item.date) > convertTimeToEpochTime
       )
     );
-    console.log(newData);
+    // console.log(newData);
   };
 
   const parentVariants = {
@@ -43,20 +42,6 @@ const Matches = () => {
     visible: {
       transition: {
         staggerChildren: 0.2,
-      },
-    },
-  };
-
-  const childVariants = {
-    hidden: {
-      opacity: 0,
-      x: -50,
-    },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: {
-        duration: 1,
       },
     },
   };

@@ -40,13 +40,7 @@ let innerWidth = window.innerWidth;
 const Logo = () => {
   return (
     <LogoContainer>
-      <h1
-        onClick={() => {
-          console.log(typeof innerWidth, innerWidth);
-        }}
-      >
-        SydneyCric
-      </h1>
+      <h1>SydneyCric</h1>
       <motion.img
         src={bat}
         variants={batVariants}
