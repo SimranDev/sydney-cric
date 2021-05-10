@@ -131,7 +131,12 @@ const RightDiv = styled.div`
   justify-content: space-between;
 
   @media (max-width: 750px) {
+    margin-top: 6px;
     justify-content: flex-start;
+
+    h4 {
+      font-size: 14px;
+    }
   }
 `;
 
@@ -216,11 +221,11 @@ const DateTimeDiv = styled.div`
   @media (max-width: 750px) {
     border: none;
     height: fit-content;
-    justify-content: flex-start;
-  }
+    justify-content: center;
 
-  h3 {
-    font-size: 16px;
+    h3 {
+      font-size: 14px;
+    }
   }
 `;
 
