@@ -1,8 +1,10 @@
 import styled from "styled-components";
+import LineChart from "../components/chart/Chart";
 
 const Home = () => {
   return (
     <HomeContainer>
+      <LineChart />
       <div>Home section under development!</div>
       <h4>Please visit "Matches" section.</h4>
     </HomeContainer>
