@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { Line } from "react-chartjs-2";
 import styled from "styled-components";
-import { getTotalCases, getDateStamp, options } from "./data";
+import { getActiveCases, getTotalCases, getDateStamp, options } from "./data";
 import axios from "axios";
 
 const LineChart = () => {
   const [countriesData, setCountriesData] = useState([]);
+  const [toggle, setToggle] = useState(true);
 
   useEffect(() => {
     async function getData() {
@@ -23,38 +24,30 @@ const LineChart = () => {
     datasets: [
       {
         label: "USA",
-        data: getTotalCases(countriesData, "USA"),
-        fill: false,
+        data: toggle
+          ? getTotalCases(countriesData, "USA")
+          : getActiveCases(countriesData, "USA"),
         borderColor: "red",
-        tension: 0.3,
       },
       {
         label: "India",
         data: getTotalCases(countriesData, "India"),
-        fill: false,
         borderColor: "orange",
-        tension: 0.3,
       },
       {
         label: "Brazil",
         data: getTotalCases(countriesData, "Brazil"),
-        fill: false,
         borderColor: "green",
-        tension: 0.3,
       },
       {
         label: "France",
         data: getTotalCases(countriesData, "France"),
-        fill: false,
         borderColor: "blue",
-        tension: 0.3,
       },
       {
         label: "Turkey",
         data: getTotalCases(countriesData, "Turkey"),
-        fill: false,
-        borderColor: "grey",
-        tension: 0.3,
+        borderColor: "#AA00FF",
       },
     ],
   };
@@ -62,6 +55,9 @@ const LineChart = () => {
   return (
     <ParentContainer>
       <Line data={data} options={options} />
+      <ToggleBtn onClick={() => setToggle(!toggle)}>
+        {toggle ? "Scoring Average" : "Total Scores"}
+      </ToggleBtn>
     </ParentContainer>
   );
 };
@@ -69,7 +65,35 @@ const LineChart = () => {
 export default LineChart;
 
 const ParentContainer = styled.div`
-  margin-top: 300px;
+  margin-top: 50px;
   display: flex;
+  position: relative;
   width: 90%;
+  height: 70vh;
+  /* border: 1px dashed green; */
+
+  @media (max-width: 550px) {
+    width: 98%;
+  }
+`;
+
+const ToggleBtn = styled.button`
+  position: absolute;
+  border-radius: 2px;
+  width: 130px;
+  background-color: var(--secondary-accent-clr);
+  color: white;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+  border-width: 0;
+  top: 80px;
+  left: 70px;
+
+  :hover {
+    transition-duration: 0.7s;
+    transform: translateY(-1.6px);
+  }
+  :active {
+    color: black;
+    transform: translateY(0px);
+  }
 `;

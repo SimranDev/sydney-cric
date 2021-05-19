@@ -1,0 +1,19 @@
+{
+  "covid-data": [
+    {
+      "PutRequest": {
+        "Item": {
+          "countryName": {
+            "S": "101"
+          },
+          "dateStamp": {
+            "N": "1234"
+          },
+          "active": {
+            "N": "125"
+          }
+        }
+      }
+    }
+  ]
+}

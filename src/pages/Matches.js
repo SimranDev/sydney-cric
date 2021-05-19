@@ -114,7 +114,6 @@ const MatchesContainer = styled(motion.div)`
 const FilterButton = styled(motion.button)`
   width: 100px;
   border-radius: 2px;
-
   background-color: var(--secondary-accent-clr);
   color: white;
   margin: 0 10px;
