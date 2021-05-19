@@ -7,6 +7,7 @@ import axios from "axios";
 
 const LineChart = () => {
   const [dataState, setDataState] = useState([]);
+  const [labels, setLabels] = useState([]);
 
   useEffect(() => {
     async function getData() {
@@ -14,17 +15,22 @@ const LineChart = () => {
         .get(
           "https://2zbwayfgle.execute-api.ap-southeast-2.amazonaws.com/prod/countries"
         )
-        .then((response) => response.data.countries)
+        .then((response) => setDataState(response.data.countries))
         .catch((error) => console.log(error));
-      setDataState(dynamoData);
-      // console.log("dynamoData", dynamoData);
       return dynamoData;
     }
     getData();
   }, []);
 
+  const getDateStamp = () => {
+    const dates = dataState
+      .filter((item) => item.countryName === "USA")
+      .map((val) => val.dateStamp.toString());
+    return dates;
+  };
+
   const data = {
-    labels: ["15 Mar", "21 Apr", "15 May", "16 Jun", "14 Jul", "Day X"],
+    labels: getDateStamp(),
     datasets: [
       {
         label: "USA",
@@ -82,6 +88,7 @@ const LineChart = () => {
   return (
     <ParentContainer>
       <Line data={data} options={options} />
+      <button onClick={() => setLabels(getDateStamp)}>get dateStamp</button>
     </ParentContainer>
   );
 };
