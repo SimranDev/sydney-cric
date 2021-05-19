@@ -11,11 +11,13 @@ const LineChart = () => {
   useEffect(() => {
     async function getData() {
       const dynamoData = await axios
-        .get("/countries")
+        .get(
+          "https://2zbwayfgle.execute-api.ap-southeast-2.amazonaws.com/prod/countries"
+        )
         .then((response) => response.data.countries)
         .catch((error) => console.log(error));
       setDataState(dynamoData);
-      console.log("dynamoData", dynamoData);
+      // console.log("dynamoData", dynamoData);
       return dynamoData;
     }
     getData();

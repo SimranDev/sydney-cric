@@ -1,10 +1,10 @@
-import axios from "axios";
+// import axios from "axios";
 
-export let dynamoData = [];
+// export let dynamoData = [];
 
-export const getCountries = () => {
-  axios
-    .get("/countries")
-    .then((response) => (dynamoData = response.data.countries))
-    .catch((error) => console.log(error));
-};
+// export const getCountries = () => {
+//   axios
+//     .get("/countries")
+//     .then((response) => (dynamoData = response.data.countries))
+//     .catch((error) => console.log(error));
+// };
