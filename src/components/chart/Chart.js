@@ -25,8 +25,9 @@ const LineChart = () => {
   const getDateStamp = () => {
     const dates = dataState
       .filter((item) => item.countryName === "USA")
-      .map((val) => val.dateStamp.toString());
-    return dates;
+      .map((val) => new Date(val.dateStamp * 1000));
+    const dateSubString = dates.map((val) => val.toString().substring(4, 15));
+    return dateSubString;
   };
 
   const data = {
